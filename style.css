@@ -45,20 +45,40 @@ body {
 }
 
 .card {
+  position: relative;
   flex: 1 1 300px;
   height: 300px;
+  min-width: 300px;
   background-color: white;
   font-size: 1.5rem;
   border-radius: 10px;
   display: flex;
+  cursor: pointer;
+}
+
+.card:hover .face-card {
+  transform: rotateY(90deg);
+  transition-delay: 0ms;
+}
+
+.card:hover .stats-card {
+  transform: rotateY(0deg);
+  transition-delay: 200ms;
+}
+
+.face-card,
+.stats-card {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  inset: 0;
+  transition: 200ms linear;
 }
 
 .face-card {
-  display: flex;
   flex-wrap: wrap;
-  justify-content: center;
   font-weight: bold;
-  cursor: pointer;
+  transition-delay: 200ms;
 }
 
 .face-card span {
@@ -71,28 +91,13 @@ body {
 }
 
 .stats-card {
+  flex-direction: column;
   height: 100%;
-  display: flex;
-  justify-content: center;
   align-items: center;
-  display: none;
   padding: 20px;
+  transform: rotateY(90deg);
 }
 
 .stats-card p span:nth-child(1) {
   font-weight: bold;
-}
-
-@keyframes show {
-  from {
-    transform: rotateY(0deg)
-  }
-
-  to {
-    transform: rotateY(180deg)
-  }
-}
-
-.show {
-  animation: show 500ms forwards;
 }
