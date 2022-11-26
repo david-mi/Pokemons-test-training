@@ -1,4 +1,5 @@
 import { getPokemons } from "./api.js";
+import { handleCardClick } from "./handlers.js";
 const cardsElement = document.querySelector(".cards");
 
 const statsFrenchEnum = {
@@ -41,13 +42,7 @@ const createPokemonFaceCard = ({ id, image, name }) => {
 const createPokemonCard = (pokemon) => {
   const cardElement = document.createElement("div");
   cardElement.classList.add("card");
-  cardElement.addEventListener("click", ({ currentTarget }) => {
-    const faceCard = currentTarget.querySelector(".face-card");
-    const statsCard = currentTarget.querySelector(".stats-card");
-    currentTarget.classList.toggle("turn");
-    faceCard.classList.toggle("hide");
-    statsCard.classList.toggle("show");
-  });
+  cardElement.addEventListener("click", handleCardClick);
 
   cardElement.append(createPokemonFaceCard(pokemon), createPokemonStatsCard(pokemon.stats));
   return cardElement;
