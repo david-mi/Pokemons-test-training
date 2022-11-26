@@ -60,7 +60,6 @@ const createPokemonFaceCard = ({ id, image, name }) => {
  */
 
 const createPokemonCard = (pokemon) => {
-  console.log({ pokemon });
   const cardElement = document.createElement("div");
   cardElement.classList.add("card");
   cardElement.addEventListener("click", handleCardClick);
@@ -76,17 +75,17 @@ const createPokemonCard = (pokemon) => {
  */
 
 export const createAndDisplayPokemonCards = async () => {
-  if (!pokemonsData.full) {
-    await getPokemons();
-  } else {
-    await wait(500);
-  }
+  pokemonsData.filtered
+    ? await wait(500)
+    : await getPokemons();
 
-  const paginatedPokemons = paginateArray(pokemonsData.full);
+  const paginatedPokemons = paginateArray(pokemonsData.filtered);
+  displayPokemonCards(paginatedPokemons);
+};
 
+export const displayPokemonCards = (paginatedPokemons) => {
   paginatedPokemons.forEach(pokemonData => {
     const pokemonCard = createPokemonCard(pokemonData);
     cardsElement.insertAdjacentElement("beforeend", pokemonCard);
   });
 };
-
