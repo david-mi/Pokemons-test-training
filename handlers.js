@@ -24,6 +24,10 @@ export const handleCardClick = ({ currentTarget }) => {
   previousCard = currentTarget;
 };
 
-export const handleSearchInput = () => {
-  console.log("hi");
+export const handleLoader = () => {
+  if (paginateOptions.arrayEnd > pokemonsData.filtered.length) {
+    loaderElement.classList.add("display-none");
+  } else {
+    loaderElement.classList.remove("display-none");
+  }
 };
