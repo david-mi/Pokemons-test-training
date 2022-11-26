@@ -41,6 +41,7 @@ body {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
+  padding: 10px;
 }
 
 .card {
@@ -49,14 +50,15 @@ body {
   background-color: white;
   font-size: 1.5rem;
   border-radius: 10px;
+  display: flex;
 }
 
 .face-card {
   display: flex;
-  display: none;
   flex-wrap: wrap;
   justify-content: center;
   font-weight: bold;
+  cursor: pointer;
 }
 
 .face-card span {
@@ -70,11 +72,27 @@ body {
 
 .stats-card {
   height: 100%;
-  display: grid;
-  place-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  display: none;
   padding: 20px;
 }
 
 .stats-card p span:nth-child(1) {
   font-weight: bold;
+}
+
+@keyframes show {
+  from {
+    transform: rotateY(0deg)
+  }
+
+  to {
+    transform: rotateY(180deg)
+  }
+}
+
+.show {
+  animation: show 500ms forwards;
 }
