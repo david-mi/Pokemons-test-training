@@ -1,7 +1,8 @@
-import { pokemonsData } from "./data.js";
+import { pokemonsData } from "./data/data.js";
 import { paginateArray, paginateOptions } from "./pagination.js";
 import { cardsElement, loaderElement } from "./constants.js";
 import { displayPokemonCards } from "./view.js";
+import "./data/type.js";
 
 /** @type {Element | null} */
 let previousCard = null;
@@ -31,6 +32,16 @@ export const handleCardClick = ({ currentTarget }) => {
   previousCard = currentTarget;
 };
 
+/**
+ * Handle user input
+ * 
+ * - lowercase user input
+ * - filter pokemons data where user input is inluded in pokemon name
+ * - display filterd pokemon data
+ * 
+ * @param {InputEvent} target 
+ */
+
 export const handleSearchInput = ({ target }) => {
   const userInput = target.value.toLowerCase();
 
@@ -47,12 +58,23 @@ export const handleSearchInput = ({ target }) => {
   previousInput = userInput;
 };
 
+/**
+ * @param {PokemonData} pokemonsArray 
+ * @param {string} userInput 
+ */
+
 const filterPokemons = (pokemonsArray, userInput) => {
   pokemonsData.filtered = pokemonsArray.filter(pokemon => {
     const pokemonName = pokemon.name.toLowerCase();
     return pokemonName.indexOf(userInput) !== -1;
   });
 };
+
+/**
+ * Handle loader visibility
+ * 
+ * - if there is no more cards to load, hide it
+ */
 
 export const handleLoader = () => {
   if (paginateOptions.arrayEnd > pokemonsData.filtered.length) {

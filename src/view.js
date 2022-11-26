@@ -1,9 +1,10 @@
 import { getPokemons } from "./api.js";
-import { pokemonsData } from "./data.js";
+import { pokemonsData } from "./data/data.js";
 import { handleCardClick } from "./handlers.js";
 import { paginateArray } from "./pagination.js";
 import { wait } from "./utils.js";
 import { cardsElement } from "./constants.js";
+import "./data/type.js";
 
 const statsFrenchEnum = {
   HP: "Vie",
@@ -13,6 +14,7 @@ const statsFrenchEnum = {
   special_defense: "Défense spéciale",
   speed: "Vitesse"
 };
+
 
 /**
  * @param {PokemonDataStats} stats
@@ -36,6 +38,7 @@ const createPokemonStatsCard = (stats) => {
   return pokemonStatsCard;
 };
 
+
 /**
  * @param {PokemonData} 
  * @returns {HTMLDivElement} face pokemon card
@@ -51,6 +54,7 @@ const createPokemonFaceCard = ({ id, image, name }) => {
 
   return pokemonFaceCard;
 };
+
 
 /**
  *  Create both face and stats card for a pokemon
@@ -68,6 +72,7 @@ const createPokemonCard = (pokemon) => {
   return cardElement;
 };
 
+
 /**
  * - fetch pokemon data
  * - create pokemon cards
@@ -82,6 +87,13 @@ export const createAndDisplayPokemonCards = async () => {
   const paginatedPokemons = paginateArray(pokemonsData.filtered);
   displayPokemonCards(paginatedPokemons);
 };
+
+
+/**
+ * Display pokemons cards
+ * 
+ * @param {PokemonDataStats} paginatedPokemons 
+ */
 
 export const displayPokemonCards = (paginatedPokemons) => {
   paginatedPokemons.forEach(pokemonData => {

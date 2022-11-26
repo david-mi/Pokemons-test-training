@@ -20,6 +20,8 @@ export const paginateOptions = {
 /**
  * Handle pagination on pokemons fetched data
  * 
+ * - If paginated data is equal to filtered data, hide loader
+ * 
  * @param {PokemonData} array 
  * @returns {PokemonData} 
  */
