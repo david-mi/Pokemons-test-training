@@ -41,6 +41,13 @@ const createPokemonFaceCard = ({ id, image, name }) => {
 const createPokemonCard = (pokemon) => {
   const cardElement = document.createElement("div");
   cardElement.classList.add("card");
+  cardElement.addEventListener("click", ({ currentTarget }) => {
+    const faceCard = currentTarget.querySelector(".face-card");
+    const statsCard = currentTarget.querySelector(".stats-card");
+    currentTarget.classList.toggle("turn");
+    faceCard.classList.toggle("hide");
+    statsCard.classList.toggle("show");
+  });
 
   cardElement.append(createPokemonFaceCard(pokemon), createPokemonStatsCard(pokemon.stats));
   return cardElement;
