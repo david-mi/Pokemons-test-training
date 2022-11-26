@@ -9,6 +9,13 @@ export const paginateOptions = {
   }
 };
 
+/**
+ * Handle pagination on pokemons fetched data
+ * 
+ * @param {PokemonData} array 
+ * @returns {PokemonData} 
+ */
+
 export const paginateArray = (array) => {
   const { offset } = paginateOptions;
   const paginatedArray = array.slice(offset);

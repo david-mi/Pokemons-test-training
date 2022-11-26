@@ -11,6 +11,11 @@ const statsFrenchEnum = {
   speed: "Vitesse"
 };
 
+/**
+ * @param {PokemonDataStats} stats
+ * @returns {HTMLDivElement} stats pokemon card
+ */
+
 const createPokemonStatsCard = (stats) => {
   const statsHtml = Object.entries(stats).reduce((html, [key, value]) => {
     return html += `
@@ -28,6 +33,11 @@ const createPokemonStatsCard = (stats) => {
   return pokemonStatsCard;
 };
 
+/**
+ * @param {PokemonData} 
+ * @returns {HTMLDivElement} face pokemon card
+ */
+
 const createPokemonFaceCard = ({ id, image, name }) => {
   const pokemonFaceCard = document.createElement("div");
   pokemonFaceCard.classList.add("face-card");
@@ -39,6 +49,13 @@ const createPokemonFaceCard = ({ id, image, name }) => {
   return pokemonFaceCard;
 };
 
+/**
+ *  Create both face and stats card for a pokemon
+ * 
+ * @param {PokemonData} pokemon 
+ * @returns {HTMLDivElement}
+ */
+
 const createPokemonCard = (pokemon) => {
   const cardElement = document.createElement("div");
   cardElement.classList.add("card");
@@ -47,6 +64,12 @@ const createPokemonCard = (pokemon) => {
   cardElement.append(createPokemonFaceCard(pokemon), createPokemonStatsCard(pokemon.stats));
   return cardElement;
 };
+
+/**
+ * - fetch pokemon data
+ * - create pokemon cards
+ * - display them
+ */
 
 export const createAndDisplayPokemonCards = async () => {
   const pokemonsData = await getPokemons();
