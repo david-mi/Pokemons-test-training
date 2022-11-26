@@ -1,5 +1,12 @@
+import { pokemonsData } from "./data.js";
+import { paginateArray, paginateOptions } from "./pagination.js";
+import { cardsElement, loaderElement } from "./constants.js";
+import { displayPokemonCards } from "./view.js";
+
 /** @type {Element | null} */
 let previousCard = null;
+
+let previousInput = null;
 
 /**
  * Handle click on pokemon card
@@ -22,6 +29,29 @@ export const handleCardClick = ({ currentTarget }) => {
   faceCard.classList.toggle("hide");
   statsCard.classList.toggle("show");
   previousCard = currentTarget;
+};
+
+export const handleSearchInput = ({ target }) => {
+  const userInput = target.value.toLowerCase();
+
+  if (userInput.startsWith(previousInput)) {
+    filterPokemons(pokemonsData.filtered, userInput);
+  } else {
+    filterPokemons(pokemonsData.full, userInput);
+  }
+
+  paginateOptions.resetOffset();
+  cardsElement.innerHTML = "";
+  const paginatedPokemons = paginateArray(pokemonsData.filtered);
+  displayPokemonCards(paginatedPokemons);
+  previousInput = userInput;
+};
+
+const filterPokemons = (pokemonsArray, userInput) => {
+  pokemonsData.filtered = pokemonsArray.filter(pokemon => {
+    const pokemonName = pokemon.name.toLowerCase();
+    return pokemonName.indexOf(userInput) !== -1;
+  });
 };
 
 export const handleLoader = () => {
