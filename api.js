@@ -5,4 +5,5 @@ export const getPokemons = async () => {
   const response = await fetch(url);
   const pokemonsApiData = await response.json();
   pokemonsData.full = pokemonsApiData;
+  pokemonsData.filtered = pokemonsApiData;
 };
