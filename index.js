@@ -1,13 +1,18 @@
+import { handleSearchInput } from "./handlers.js";
 import { createAndDisplayPokemonCards } from "./view.js";
 
 const loaderElement = document.querySelector(".loader");
+
+const searchInput = document.querySelector("input[type='text']");
+searchInput.addEventListener("input", handleSearchInput);
+
 let isFetchingData = false;
 
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(async ({ isIntersecting }) => {
     if (isIntersecting && !isFetchingData) {
       isFetchingData = true;
-      createAndDisplayPokemonCards();
+      await createAndDisplayPokemonCards();
       isFetchingData = false;
     }
   });
@@ -15,6 +20,6 @@ const observer = new IntersectionObserver((entries) => {
 
 
 (async () => {
-  createAndDisplayPokemonCards();
+  await createAndDisplayPokemonCards();
   observer.observe(loaderElement);
 })();

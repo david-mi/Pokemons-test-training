@@ -23,3 +23,7 @@ export const handleCardClick = ({ currentTarget }) => {
   statsCard.classList.toggle("show");
   previousCard = currentTarget;
 };
+
+export const handleSearchInput = () => {
+  console.log("hi");
+};

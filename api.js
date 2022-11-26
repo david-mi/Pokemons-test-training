@@ -1,9 +1,8 @@
-import { paginateArray, paginateOptions } from "./utils.js";
+import { pokemonsData } from "./data.js";
 
 export const getPokemons = async () => {
-  const url = `https://pokebuildapi.fr/api/v1/pokemon/limit/${paginateOptions.arrayEnd}`;
+  const url = `https://pokebuildapi.fr/api/v1/pokemon/`;
   const response = await fetch(url);
-  const pokemonsData = await response.json();
-  console.log(pokemonsData);
-  return paginateArray(pokemonsData);
+  const pokemonsApiData = await response.json();
+  pokemonsData.full = pokemonsApiData;
 };

@@ -1,5 +1,8 @@
 import { getPokemons } from "./api.js";
+import { pokemonsData } from "./data.js";
 import { handleCardClick } from "./handlers.js";
+import { paginateArray } from "./pagination.js";
+import { wait } from "./utils.js";
 const cardsElement = document.querySelector(".cards");
 
 const statsFrenchEnum = {
@@ -57,6 +60,7 @@ const createPokemonFaceCard = ({ id, image, name }) => {
  */
 
 const createPokemonCard = (pokemon) => {
+  console.log({ pokemon });
   const cardElement = document.createElement("div");
   cardElement.classList.add("card");
   cardElement.addEventListener("click", handleCardClick);
@@ -72,9 +76,15 @@ const createPokemonCard = (pokemon) => {
  */
 
 export const createAndDisplayPokemonCards = async () => {
-  const pokemonsData = await getPokemons();
+  if (!pokemonsData.full) {
+    await getPokemons();
+  } else {
+    await wait(500);
+  }
 
-  pokemonsData.forEach(pokemonData => {
+  const paginatedPokemons = paginateArray(pokemonsData.full);
+
+  paginatedPokemons.forEach(pokemonData => {
     const pokemonCard = createPokemonCard(pokemonData);
     cardsElement.insertAdjacentElement("beforeend", pokemonCard);
   });
