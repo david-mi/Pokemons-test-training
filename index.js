@@ -1,7 +1,6 @@
 import { handleSearchInput } from "./handlers.js";
 import { createAndDisplayPokemonCards } from "./view.js";
-
-const loaderElement = document.querySelector(".loader");
+import { loaderElement } from "./constants.js";
 
 const searchInput = document.querySelector("input[type='text']");
 searchInput.addEventListener("input", handleSearchInput);

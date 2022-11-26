@@ -3,7 +3,7 @@ import { pokemonsData } from "./data.js";
 import { handleCardClick } from "./handlers.js";
 import { paginateArray } from "./pagination.js";
 import { wait } from "./utils.js";
-const cardsElement = document.querySelector(".cards");
+import { cardsElement } from "./constants.js";
 
 const statsFrenchEnum = {
   HP: "Vie",
