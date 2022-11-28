@@ -20,5 +20,7 @@ const observer = new IntersectionObserver((entries) => {
 
 (async () => {
   await createAndDisplayPokemonCards();
+  searchInput.removeAttribute("disabled");
+  searchInput.focus();
   observer.observe(loaderElement);
 })();
